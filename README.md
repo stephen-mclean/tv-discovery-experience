@@ -24,6 +24,30 @@ pnpm install
 pnpm dev          # run web + api in watch mode
 ```
 
+### API keys
+
+The API needs an OpenAI key and a TMDB **API Read Access Token** (the long v4 token, not the short v3 key):
+
+```sh
+cp apps/api/.env.example apps/api/.env   # then fill in OPENAI_API_KEY and TMDB_API_KEY
+```
+
+## API endpoints
+
+Request/response shapes live in `packages/contracts` (Zod). Errors are always JSON `{ "error": string }`.
+
+| Endpoint                            | Description                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `GET /api/home`                     | Rows for the home screen (trending movies/TV/people, upcoming movies, top rated TV)               |
+| `GET /api/search?q=…[&type=…]`      | Free-text search, optionally limited to `movie`, `tv` or `person`                                 |
+| `GET /api/search?list=…&type=…`     | Curated list: `popular`, `upcoming`, `trending`, `top_rated` × `movie`/`tv`                       |
+| `GET /api/search?similarTo=tv:1396` | Recommendations for a title                                                                       |
+| `GET /api/detail/:mediaType/:id`    | Title (cast, trailer, recommendations) or person (bio, credits) details                           |
+| `POST /api/interpret`               | `{ "text": "…" }` → intent + UI action (+ answer for factual questions)                           |
+| `POST /api/voice`                   | `multipart/form-data` with an `audio` file (≤ 5 MB) → transcribe, then same response as interpret |
+
+All search endpoints accept `&page=N`. Run `pnpm --filter=api eval` to check the interpret pipeline against the README example queries (uses real OpenAI/TMDB calls).
+
 ## Scripts
 
 All scripts run through Turborepo from the repo root:
