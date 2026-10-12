@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Scan this package's classes from whichever app imports the stylesheet. */
+@source "./";
+
+/*
+ * Design tokens for a 10-foot UI on a 1920×1080 reference canvas.
+ * Type sizes assume a 16px root.
+ */
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --text-display: 4rem;
+  --text-display--line-height: 1.05;
+  --text-display--font-weight: 800;
+  --text-title: 3rem;
+  --text-title--line-height: 1.1;
+  --text-heading: 2rem;
+  --text-heading--line-height: 1.2;
+  --text-body: 1.5rem;
+  --text-body--line-height: 1.45;
+  --text-caption: 1.25rem;
+  --text-caption--line-height: 1.3;
+
+  --color-canvas: #0b0b0f;
+  --color-surface: #16161d;
+  --color-surface-raised: #23232d;
+  --color-fg: #f5f5f7;
+  --color-fg-muted: #b8b8c6;
+  --color-accent: #ffb547;
+  --color-danger: #ff6b6b;
+  --color-focus: #ffffff;
+
+  /* Overscan-safe page padding. */
+  --spacing-safe-x: 5vw;
+  --spacing-safe-y: 5vh;
+
+  --spacing-tile-md: 14rem;
+  --spacing-tile-lg: 18rem;
+  --spacing-person: 10rem;
+
+  --shadow-lift: 0 1.5rem 3rem -0.5rem rgb(0 0 0 / 0.8);
+
+  --ease-tv: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:root {
+  --duration-focus: 150ms;
+  --duration-enter: 300ms;
+  --focus-scale: 1.08;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-focus: 0ms;
+    --duration-enter: 0ms;
+  }
+}
+
+/*
+ * Focused, or forced on in stories via data-focused. Deliberately :focus, not
+ * :focus-visible: on a TV the ring is the only cursor, and browsers don't
+ * match :focus-visible for programmatic focus (e.g. focusing the first item
+ * when a page opens) until the user has pressed a key.
+ */
+@custom-variant tv-focus (&:focus, &[data-focused]);
+
+/* A bright ring with an offset. Readable from across the room. */
+@utility focus-ring {
+  outline: 4px solid transparent;
+  outline-offset: 4px;
+  transition-property: outline-color, transform, box-shadow;
+  transition-duration: var(--duration-focus);
+  transition-timing-function: var(--ease-tv);
+}
+
+@utility focus-ring-on {
+  outline-color: var(--color-focus);
+  box-shadow: var(--shadow-lift);
+}
+
+@utility focus-lift {
+  transform: scale(var(--focus-scale));
+}

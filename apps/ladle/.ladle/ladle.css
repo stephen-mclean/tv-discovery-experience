@@ -1,0 +1,19 @@
+@import "@repo/ui/styles.css";
+
+/* Tailwind only scans the UI package by default; add the stories too. */
+@source "../src";
+@source "./";
+
+/*
+ * Let stories fill the preview so the TV canvas reaches the edges. The
+ * Provider applies the overscan-safe padding instead. `html:root` outranks
+ * Ladle's own `:root` definitions regardless of stylesheet order.
+ */
+html:root {
+  --ladle-main-padding: 0;
+  --ladle-main-padding-mobile: 0;
+}
+
+.ladle-main {
+  background: var(--color-canvas);
+}
