@@ -78,3 +78,7 @@ Make content easy to browse and navigate without a mouse.
 Prioritize intuitive interactions, readable content, and clear navigation states.
 Visual polish is appreciated
 
+### Media API 
+
+We will use TMDB for retrieving media information: https://developer.themoviedb.org/docs/getting-started
+
