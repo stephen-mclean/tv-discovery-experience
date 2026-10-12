@@ -1,27 +1,10 @@
-:root {
-  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
-  color-scheme: light dark;
-}
+@import "@repo/ui/styles.css";
+
+/* Tailwind only scans the UI package by default; add the app too. */
+@source "./";
 
 body {
   margin: 0;
-}
-
-main {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-nav {
-  display: flex;
-  gap: 1rem;
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 1rem 2rem 0;
-}
-
-nav a.active {
-  font-weight: bold;
+  background: var(--color-canvas);
+  color-scheme: dark;
 }
