@@ -1,0 +1,19 @@
+{
+  "name": "tv-discovery-experience",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "check-types": "turbo run check-types",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,css,html}\""
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "turbo": "2.11.7"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=24"
+  }
+}

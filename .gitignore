@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Build outputs
+dist
+dist-ssr
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.pem
