@@ -74,3 +74,9 @@ export const InterpretResponse = z.object({
   answer: z.string().nullable(),
 });
 export type InterpretResponse = z.infer<typeof InterpretResponse>;
+
+/** POST /api/interpret body. */
+export const InterpretRequest = z.object({
+  text: z.string().trim().min(1),
+});
+export type InterpretRequest = z.infer<typeof InterpretRequest>;

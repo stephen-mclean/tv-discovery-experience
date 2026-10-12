@@ -1,3 +1,4 @@
+import "./env.js";
 import { createServer } from "./server.js";
 
 const port = Number(process.env.PORT ?? 3001);

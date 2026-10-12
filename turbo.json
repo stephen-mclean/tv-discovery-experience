@@ -19,7 +19,14 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "passThroughEnv": ["PORT"]
+      "passThroughEnv": [
+        "PORT",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL",
+        "OPENAI_REASONING_EFFORT",
+        "OPENAI_TRANSCRIBE_MODEL",
+        "TMDB_API_KEY"
+      ]
     }
   }
 }

@@ -22,6 +22,30 @@ pnpm install
 pnpm dev          # run web + api in watch mode
 ```
 
+### API keys
+
+The API needs an OpenAI key and a TMDB **API Read Access Token** (the long v4 token, not the short v3 key):
+
+```sh
+cp apps/api/.env.example apps/api/.env   # then fill in OPENAI_API_KEY and TMDB_API_KEY
+```
+
+## API endpoints
+
+Request/response shapes live in `packages/contracts` (Zod). Errors are always JSON `{ "error": string }`.
+
+| Endpoint                            | Description                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `GET /api/home`                     | Rows for the home screen (trending movies/TV/people, upcoming movies, top rated TV)               |
+| `GET /api/search?q=…[&type=…]`      | Free-text search, optionally limited to `movie`, `tv` or `person`                                 |
+| `GET /api/search?list=…&type=…`     | Curated list: `popular`, `upcoming`, `trending`, `top_rated` × `movie`/`tv`                       |
+| `GET /api/search?similarTo=tv:1396` | Recommendations for a title                                                                       |
+| `GET /api/detail/:mediaType/:id`    | Title (cast, trailer, recommendations) or person (bio, credits) details                           |
+| `POST /api/interpret`               | `{ "text": "…" }` → intent + UI action (+ answer for factual questions)                           |
+| `POST /api/voice`                   | `multipart/form-data` with an `audio` file (≤ 5 MB) → transcribe, then same response as interpret |
+
+All search endpoints accept `&page=N`. Run `pnpm --filter=api eval` to check the interpret pipeline against the README example queries (uses real OpenAI/TMDB calls).
+
 ## Scripts
 
 All scripts run through Turborepo from the repo root:
@@ -42,11 +66,12 @@ The production API can be started with `pnpm --filter=api start` after a build.
 
 Type-checking uses TypeScript 7 (the native compiler, installed as `@typescript/native`, which provides `tsc`). `typescript-eslint` does not yet support TypeScript 7, so the `typescript` package name is aliased to TypeScript 6 for tooling that loads the TypeScript API. This follows the setup used in the official Turborepo examples.
 
-## Product Information 
+## Product Information
 
 We are building an interactive, TV-first experience that helps users discover movies and TV shows, learn more about titles and their cast, and find similar content to watch. The experience should feel natural to use from a couch, with voice and D-pad navigation as the primary interaction methods.
 
 ### Example User Queries
+
 Your experience should support natural-language discovery and exploration:
 
 Find me the most popular movies of all time
@@ -58,27 +83,27 @@ What movies has Brad Pitt been in?
 These are illustrative examples, not an exhaustive list of required queries.
 
 ### Functional Requirements
+
 Voice interaction: Users should be able to make natural-language requests using voice.
 D-pad navigation: The entire experience must be navigable using directional controls (keyboard arrow keys are acceptable), with a way to select items and navigate back.
 Content discovery: Users should be able to explore movie and TV results and view relevant details about a selected title.
 AI integration: Use an LLM to interpret user requests and help deliver relevant results.
 Real content data: Use TMDB to retrieve actual movie and TV information
 
-Home screen should show something useful for the user -> maybe a trending list of movies / tv shows / actors 
+Home screen should show something useful for the user -> maybe a trending list of movies / tv shows / actors
 Ease of navigation is priority
-Netflix style list screens -> drill down detail page 
-Detail pages can have links to related content (if API supports it) 
-Should be able to go back with one click 
-Voice interaction should be available everywhere 
-
+Netflix style list screens -> drill down detail page
+Detail pages can have links to related content (if API supports it)
+Should be able to go back with one click
+Voice interaction should be available everywhere
 
 ### Experience Guidelines
+
 Design for a TV or 10-foot viewing experience.
 Make content easy to browse and navigate without a mouse.
 Prioritize intuitive interactions, readable content, and clear navigation states.
 Visual polish is appreciated
 
-### Media API 
+### Media API
 
 We will use TMDB for retrieving media information: https://developer.themoviedb.org/docs/getting-started
-
