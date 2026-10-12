@@ -11,6 +11,8 @@
     "check-types": "tsc"
   },
   "dependencies": {
+    "@repo/ui": "workspace:*",
+    "motion": "14.1.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -18,10 +20,12 @@
     "@ladle/react": "5.1.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@tailwindcss/vite": "4.3.3",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@typescript/native": "npm:typescript@7.0.2",
     "eslint": "10.12.0",
+    "tailwindcss": "4.3.3",
     "typescript": "npm:@typescript/typescript6@6.0.2"
   }
 }

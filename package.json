@@ -16,5 +16,10 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=24"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@ladle/react@5.1.1": "patches/@ladle__react@5.1.1.patch"
+    }
   }
 }
